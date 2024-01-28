@@ -19,6 +19,9 @@ import { toast } from "react-toastify";
 const theme = createTheme();
 
 function Signin() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -26,7 +29,7 @@ function Signin() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
+    console.log(name, value, typeof value);
     setUser({
       ...user, //spread operator
       [name]: value,
@@ -37,7 +40,7 @@ function Signin() {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post("/login", user);
+      const res = await axios.post("/login", { email, password });
 
       if (res.data && res.data.status === 200 && res.data.result) {
         const { user, token } = res.data.result;
@@ -84,21 +87,21 @@ function Signin() {
                 fullWidth
                 label="Email Address"
                 name="email"
-                value={user.email}
+                value={email}
                 autoComplete="email"
                 autoFocus
-                onChange={handleChange}
+                onChange={(e) => setEmail(e.target.value)}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
                 name="password"
-                value={user.password}
+                value={password}
                 label="Password"
                 type="password"
                 autoComplete="new-password"
-                onChange={handleChange}
+                onChange={(e) => setPassword(e.target.value)}
                 autoFocus
               />
               <FormControlLabel
