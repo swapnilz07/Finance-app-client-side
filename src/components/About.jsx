@@ -1,5 +1,5 @@
 import { Box, CardMedia, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { validateUser } from "../api/auth/Authroutes";
 import { useNavigate } from "react-router-dom";
 import { LoginContext } from "./ContextProvider/Context";
@@ -8,7 +8,7 @@ function About() {
   const history = useNavigate();
   const { setLoginData } = useContext(LoginContext);
 
-  const homeValid = React.useCallback(async () => {
+  const homeValid = async () => {
     const res = await validateUser();
 
     if (res && res.status !== 500 && res) {
@@ -16,11 +16,11 @@ function About() {
     } else {
       history("/signin");
     }
-  }, [setLoginData, history]);
+  };
 
-  React.useEffect(() => {
+  useEffect(() => {
     homeValid();
-  }, [homeValid]);
+  }, []);
 
   return (
     <>

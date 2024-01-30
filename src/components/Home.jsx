@@ -49,7 +49,7 @@ function Home() {
   const history = useNavigate();
   const { setLoginData } = React.useContext(LoginContext);
 
-  const homeValid = React.useCallback(async () => {
+  const homeValid = async () => {
     const res = await validateUser();
 
     if (res && res.status !== 500 && res) {
@@ -57,11 +57,11 @@ function Home() {
     } else {
       history("/signin");
     }
-  }, [setLoginData, history]);
+  };
 
   React.useEffect(() => {
     homeValid();
-  }, [homeValid]);
+  }, []);
 
   return (
     <>

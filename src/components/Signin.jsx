@@ -19,9 +19,6 @@ import { toast } from "react-toastify";
 const theme = createTheme();
 
 function Signin() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -29,7 +26,7 @@ function Signin() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value, typeof value);
+    console.log(name, value);
     setUser({
       ...user, //spread operator
       [name]: value,
@@ -40,7 +37,7 @@ function Signin() {
 
   const handleLogin = async () => {
     try {
-      const res = await axios.post("/login", { email, password });
+      const res = await axios.post("/login", user);
 
       if (res.data && res.data.status === 200 && res.data.result) {
         const { user, token } = res.data.result;
@@ -53,9 +50,15 @@ function Signin() {
           return;
         }
       }
-      toast.error("Token not found in the response");
+      // toast.error("Token not found in the response");
     } catch (error) {
-      toast.error("Something went wrong");
+      if (error.response && error.response.status === 400) {
+        toast.error(
+          "Invalid email or password. Please enter correct credentials."
+        );
+      } else {
+        toast.error("An error occurred. Please try again later.");
+      }
     }
   };
 
@@ -87,21 +90,21 @@ function Signin() {
                 fullWidth
                 label="Email Address"
                 name="email"
-                value={email}
+                value={user.email}
                 autoComplete="email"
                 autoFocus
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={handleChange}
               />
               <TextField
                 margin="normal"
                 required
                 fullWidth
                 name="password"
-                value={password}
+                value={user.password}
                 label="Password"
                 type="password"
                 autoComplete="new-password"
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={handleChange}
                 autoFocus
               />
               <FormControlLabel

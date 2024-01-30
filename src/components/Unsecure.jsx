@@ -19,7 +19,7 @@ function Unsecure() {
 
   const { setLoginData } = React.useContext(LoginContext);
 
-  const homeValid = React.useCallback(async () => {
+  const homeValid = async () => {
     const res = await validateUser();
 
     if (res && res.status !== 500 && res) {
@@ -27,11 +27,12 @@ function Unsecure() {
     } else {
       history("/signin");
     }
-  }, [setLoginData, history]);
+  };
 
   React.useEffect(() => {
     homeValid();
-  }, [homeValid]);
+  }, []);
+
   const images = [
     {
       name: "Business Loan",

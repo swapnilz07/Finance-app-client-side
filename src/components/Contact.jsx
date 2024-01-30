@@ -1,5 +1,5 @@
 import { Box, CardMedia, Divider, Grid, Typography } from "@mui/material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import EmailIcon from "@mui/icons-material/Email";
 import CallIcon from "@mui/icons-material/Call";
@@ -11,7 +11,7 @@ function Contact() {
   const history = useNavigate();
   const { setLoginData } = useContext(LoginContext);
 
-  const homeValid = React.useCallback(async () => {
+  const homeValid = async () => {
     const res = await validateUser();
 
     if (res && res.status !== 500 && res) {
@@ -19,11 +19,11 @@ function Contact() {
     } else {
       history("/signin");
     }
-  }, [setLoginData, history]);
+  };
 
-  React.useEffect(() => {
+  useEffect(() => {
     homeValid();
-  }, [homeValid]);
+  }, []);
 
   return (
     <>

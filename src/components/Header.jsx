@@ -117,19 +117,21 @@ export default function PersistentDrawerLeft() {
 
   const history = useNavigate();
 
-  const homeValid = React.useCallback(async () => {
+  const homeValid = async () => {
     const res = await validateUser();
+
+    console.log("response data ==>>", res);
 
     if (res && res.status !== 500 && res) {
       setLoginData(res);
     } else {
       history("/signin");
     }
-  }, [setLoginData, history]);
+  };
 
   React.useEffect(() => {
     homeValid();
-  }, [homeValid]);
+  }, []);
 
   console.log("login data header ==>>", loginData);
 

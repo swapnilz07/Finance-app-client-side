@@ -2,7 +2,7 @@
   "name": "finance",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://finance-app-server-side.vercel.app/",
+  "proxy": "http://localhost:2022",
   "dependencies": {
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",

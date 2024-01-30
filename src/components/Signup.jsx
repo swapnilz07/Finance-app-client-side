@@ -46,28 +46,6 @@ function Signup() {
 
   const navigate = useNavigate();
 
-  // const register = () => {
-  //   try {
-  //     const { fname, lname, contact, email, password, reEnterPassword } = user;
-  //     if (
-  //       !fname ||
-  //       !lname ||
-  //       !contact ||
-  //       !email ||
-  //       !password ||
-  //       !(password === reEnterPassword)
-  //     )
-  //       toast.error("Invalid details");
-
-  //     const res = axios.post("/register", user).then((res) => console.log(res));
-  //     toast.success(res.data || "Your Registration has been successfull");
-  //     navigate("/signin");
-  //   } catch (err) {
-  //     console.log({ err });
-  //     toast.error(err.message);
-  //   }
-  // };
-
   const registerUser = async () => {
     try {
       const { fname, lname, contact, email, password, reEnterPassword } = user;

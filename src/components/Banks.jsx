@@ -42,6 +42,7 @@ function Banks() {
   });
 
   const handleChange = (event, newValue) => {
+    console.log(newValue, "e", event);
     setValue(newValue);
   };
   //Accordian
@@ -57,7 +58,7 @@ function Banks() {
 
   console.log("home logindata ==>>", loginData);
 
-  const homeValid = React.useCallback(async () => {
+  const homeValid = async () => {
     const res = await validateUser();
 
     if (res && res.status !== 500 && res) {
@@ -65,11 +66,11 @@ function Banks() {
     } else {
       history("/signin");
     }
-  }, [setLoginData, history]);
+  };
 
   React.useEffect(() => {
     homeValid();
-  }, [homeValid]);
+  }, []);
 
   return (
     <>
@@ -136,6 +137,7 @@ function Banks() {
               data?.loan_data?.map((bank, key) => {
                 return (
                   <TabPanel value={key}>
+                    {console.log(bank)}
                     <Accordion
                       expanded={expanded === "panel1"}
                       onChange={handlerChange("panel1")}
@@ -153,6 +155,7 @@ function Banks() {
                         <TableContainer component={Paper}>
                           <Table area-label="simple table">
                             {bank.q1.map((e) => {
+                              console.log(e, "e");
                               return (
                                 <TableHead>
                                   <TableRow>

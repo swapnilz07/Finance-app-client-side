@@ -32,6 +32,7 @@ function Apply() {
   const [rdoc, setRdoc] = useState("");
 
   const handlerChange = (e) => {
+    console.log(e.target.value);
     setEmpsts(e.target.value);
     setGender(e.target.value);
   };
@@ -62,6 +63,7 @@ function Apply() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value);
     setUser({
       ...user, //spread operator
       [name]: value,
@@ -69,6 +71,7 @@ function Apply() {
   };
 
   const Apply = () => {
+    console.log("ahahahha");
     const { fname, lname, age, adress, email, contact, aadhar, pan, voterid } =
       user;
     if (

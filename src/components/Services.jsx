@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
@@ -22,7 +22,7 @@ function Services() {
   const history = useNavigate();
   const { setLoginData } = useContext(LoginContext);
 
-  const homeValid = React.useCallback(async () => {
+  const homeValid = async () => {
     const res = await validateUser();
 
     if (res && res.status !== 500 && res) {
@@ -30,11 +30,11 @@ function Services() {
     } else {
       history("/signin");
     }
-  }, [setLoginData, history]);
+  };
 
-  React.useEffect(() => {
+  useEffect(() => {
     homeValid();
-  }, [homeValid]);
+  }, []);
 
   return (
     <>

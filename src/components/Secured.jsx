@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Box from "@mui/material/Box";
 import Tab from "@mui/material/Tab";
 import Card from "@mui/material/Card";
@@ -64,7 +64,7 @@ function Secured() {
 
   const history = useNavigate();
 
-  const homeValid = React.useCallback(async () => {
+  const homeValid = async () => {
     const res = await validateUser();
 
     if (res && res.status !== 500 && res) {
@@ -72,11 +72,11 @@ function Secured() {
     } else {
       history("/signin");
     }
-  }, [setLoginData, history]);
+  };
 
-  React.useEffect(() => {
+  useEffect(() => {
     homeValid();
-  }, [homeValid]);
+  }, []);
 
   return (
     <>
